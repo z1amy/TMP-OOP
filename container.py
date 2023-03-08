@@ -1,4 +1,4 @@
-from matrix import SquareMatrix, SquareDiagonalMatrix
+from matrix import SquareMatrix, SquareDiagonalMatrix, LowerTriangularMatrix
 
 
 class Node:
@@ -46,6 +46,9 @@ class CircularLinkedList:
                 new_matrix.fill_matrix(matrix_data)
             elif type_of_matrix == 2:
                 new_matrix = SquareDiagonalMatrix(size_of_matrix)
+                new_matrix.fill_matrix(matrix_data)
+            elif type_of_matrix == 3:
+                new_matrix = LowerTriangularMatrix(size_of_matrix)
                 new_matrix.fill_matrix(matrix_data)
             self.add(new_matrix)
 

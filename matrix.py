@@ -41,3 +41,20 @@ class SquareDiagonalMatrix(Matrix):
                     tmp_matrix[i][j] = int(numbers[k])
                     k += 1
         self.matrix_data = tmp_matrix
+
+
+class LowerTriangularMatrix(Matrix):
+    def __init__(self, size_of_matrix):
+        super().__init__(size_of_matrix)
+        self.type_of_matrix = 'Lower Triangular Matrix'
+
+    def fill_matrix(self, matrix_data):
+        numbers = str.split(matrix_data, ' ')
+        tmp_matrix = [[0 for _ in range(self.size_of_matrix)] for _ in range(self.size_of_matrix)]
+        k = 0
+        for i in range(self.size_of_matrix):
+            for j in range(self.size_of_matrix):
+                if i >= j:
+                    tmp_matrix[i][j] = int(numbers[k])
+                    k += 1
+        self.matrix_data = tmp_matrix
