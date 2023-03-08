@@ -17,6 +17,9 @@ class Matrix:
                 all_sum += self.matrix_data[i][j]
         return all_sum
 
+    def compare(self, other):
+        return self.sum_of_all_matrix_elements() < other.sum_of_all_matrix_elements()
+
 
 class SquareMatrix(Matrix):
     def __init__(self, size_of_matrix):
