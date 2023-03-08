@@ -9,6 +9,9 @@ class Matrix:
                f'\tSize of Matrix = {self.size_of_matrix}\n' \
                f'\tMatrix Data = {self.matrix_data}\n'
 
+    def get_type_of_matrix(self):
+        return self.type_of_matrix
+
 
 class SquareMatrix(Matrix):
     def __init__(self, size_of_matrix):
