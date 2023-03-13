@@ -33,19 +33,20 @@ class CircularLinkedList:
 
     def read_from_file(self, in_file):
         lines = in_file.readlines()
-        if len(lines) % 3 != 0:
+        if len(lines) % 4 != 0:
             return
 
-        for index in range(0, len(lines), 3):
+        for index in range(0, len(lines), 4):
             type_of_matrix = int(lines[index].strip())
             size_of_matrix = int(lines[index + 1].strip())
-            matrix_data = lines[index + 2].strip()
+            output_type = int(lines[index + 2].strip())
+            matrix_data = lines[index + 3].strip()
             new_matrix = None
             if type_of_matrix == 1:
-                new_matrix = SquareMatrix(size_of_matrix)
+                new_matrix = SquareMatrix(size_of_matrix, output_type)
                 new_matrix.fill_matrix(matrix_data)
             elif type_of_matrix == 2:
-                new_matrix = SquareDiagonalMatrix(size_of_matrix)
+                new_matrix = SquareDiagonalMatrix(size_of_matrix, output_type)
                 new_matrix.fill_matrix(matrix_data)
             elif type_of_matrix == 3:
                 new_matrix = LowerTriangularMatrix(size_of_matrix)
@@ -59,11 +60,17 @@ class CircularLinkedList:
         else:
             i = 0
             out_file.write('Filled Container:\n')
-            out_file.write(f'{i}: {str(current.data)}')
+            if current.data.get_output_type() == 1:
+                out_file.write(f'{i}: {str(current.data.print_matrix())}')
+            else:
+                out_file.write(f'{i}: {str(current.data)}')
             while current.next != self.head:
                 i += 1
                 current = current.next
-                out_file.write(f'{i}: {str(current.data)}')
+                if current.data.get_output_type() == 1:
+                    out_file.write(f'{i}: {str(current.data.print_matrix())}')
+                else:
+                    out_file.write(f'{i}: {str(current.data)}')
         out_file.write(f'Container contains {self.__len__()} elements.\n')
 
     def filtered_write_to_file(self, out_file):
