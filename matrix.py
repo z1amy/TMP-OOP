@@ -39,6 +39,7 @@ class Matrix:
                 else:
                     out_str += f'{self.matrix_data[i][j]}'
             out_str += f'\n'
+        out_str += f'\tSum of all Elements = {self.sum_of_all_matrix_elements()}\n'
         return out_str
 
 
@@ -76,8 +77,8 @@ class SquareDiagonalMatrix(Matrix):
 
 
 class LowerTriangularMatrix(Matrix):
-    def __init__(self, size_of_matrix):
-        super().__init__(size_of_matrix)
+    def __init__(self, size_of_matrix, output_type):
+        super().__init__(size_of_matrix, output_type)
         self.type_of_matrix = 'Lower Triangular Matrix'
 
     def fill_matrix(self, matrix_data):

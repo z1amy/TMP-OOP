@@ -49,7 +49,7 @@ class CircularLinkedList:
                 new_matrix = SquareDiagonalMatrix(size_of_matrix, output_type)
                 new_matrix.fill_matrix(matrix_data)
             elif type_of_matrix == 3:
-                new_matrix = LowerTriangularMatrix(size_of_matrix)
+                new_matrix = LowerTriangularMatrix(size_of_matrix, output_type)
                 new_matrix.fill_matrix(matrix_data)
             self.add(new_matrix)
 
@@ -81,12 +81,18 @@ class CircularLinkedList:
             i = 0
             out_file.write('Filled Container:\n')
             if current.data.get_type_of_matrix() == 'Square Matrix':
-                out_file.write(f'{i}: {str(current.data)}')
+                if current.data.get_output_type() == 1:
+                    out_file.write(f'{i}: {str(current.data.print_matrix())}')
+                else:
+                    out_file.write(f'{i}: {str(current.data)}')
             while current.next != self.head:
                 i += 1
                 current = current.next
                 if current.data.get_type_of_matrix() == 'Square Matrix':
-                    out_file.write(f'{i}: {str(current.data)}')
+                    if current.data.get_output_type() == 1:
+                        out_file.write(f'{i}: {str(current.data.print_matrix())}')
+                    else:
+                        out_file.write(f'{i}: {str(current.data)}')
         out_file.write(f'Container contains {self.__len__()} elements.\n')
 
     def sort(self):
