@@ -20,6 +20,9 @@ class Matrix:
     def compare(self, other):
         return self.sum_of_all_matrix_elements() < other.sum_of_all_matrix_elements()
 
+    def get_type_of_matrix(self):
+        return self.type_of_matrix
+
 
 class SquareMatrix(Matrix):
     def __init__(self, size_of_matrix):

@@ -18,11 +18,11 @@ def main():
     cl.sort()
 
     with open(output_file, 'w') as out_file:
-        cl.write_to_file(out_file)
+        cl.filtered_write_to_file(out_file)
 
     with open(output_file, 'a') as out_file:
         cl.clear()
-        cl.write_to_file(out_file)
+        cl.filtered_write_to_file(out_file)
 
 
 if __name__ == '__main__':

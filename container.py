@@ -66,6 +66,22 @@ class CircularLinkedList:
                 out_file.write(f'{i}: {str(current.data)}')
         out_file.write(f'Container contains {self.__len__()} elements.\n')
 
+    def filtered_write_to_file(self, out_file):
+        current = self.head
+        if self.head is None:
+            out_file.write('Container is empty!\n')
+        else:
+            i = 0
+            out_file.write('Filled Container:\n')
+            if current.data.get_type_of_matrix() == 'Square Matrix':
+                out_file.write(f'{i}: {str(current.data)}')
+            while current.next != self.head:
+                i += 1
+                current = current.next
+                if current.data.get_type_of_matrix() == 'Square Matrix':
+                    out_file.write(f'{i}: {str(current.data)}')
+        out_file.write(f'Container contains {self.__len__()} elements.\n')
+
     def sort(self):
         if self.head is not None:
             node1 = self.head
