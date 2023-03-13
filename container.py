@@ -65,3 +65,19 @@ class CircularLinkedList:
                 current = current.next
                 out_file.write(f'{i}: {str(current.data)}')
         out_file.write(f'Container contains {self.__len__()} elements.\n')
+
+    def sort(self):
+        if self.head is not None:
+            node1 = self.head
+            node2 = self.head.next
+            while True:
+                while True:
+                    if node1.data.compare(node2.data):
+                        node1.data, node2.data = node2.data, node1.data
+                    node2 = node2.next
+                    if node2 is self.head:
+                        break
+                node1 = node1.next
+                node2 = self.head
+                if node1 is self.head:
+                    break

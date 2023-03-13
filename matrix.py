@@ -7,7 +7,18 @@ class Matrix:
     def __str__(self):
         return f'\tType of Matrix = {self.type_of_matrix}\n' \
                f'\tSize of Matrix = {self.size_of_matrix}\n' \
-               f'\tMatrix Data = {self.matrix_data}\n'
+               f'\tMatrix Data = {self.matrix_data}\n' \
+               f'\tSum of all Elements = {self.sum_of_all_matrix_elements()}\n'
+
+    def sum_of_all_matrix_elements(self):
+        all_sum = 0
+        for i in range(self.size_of_matrix):
+            for j in range(self.size_of_matrix):
+                all_sum += self.matrix_data[i][j]
+        return all_sum
+
+    def compare(self, other):
+        return self.sum_of_all_matrix_elements() < other.sum_of_all_matrix_elements()
 
 
 class SquareMatrix(Matrix):
