@@ -1,4 +1,5 @@
 from matrix import SquareMatrix, SquareDiagonalMatrix, LowerTriangularMatrix
+import sys
 
 
 class Node:
@@ -32,68 +33,98 @@ class CircularLinkedList:
         self.size += 1
 
     def read_from_file(self, in_file):
-        lines = in_file.readlines()
+        try:
+            lines = in_file.readlines()
+        except OSError:
+            print(f'File reading error {in_file}!')
+            sys.exit(1)
+
         if len(lines) % 4 != 0:
-            return
+            print('Invalid input data format!')
+            sys.exit(1)
 
         for index in range(0, len(lines), 4):
-            type_of_matrix = int(lines[index].strip())
-            size_of_matrix = int(lines[index + 1].strip())
-            output_type = int(lines[index + 2].strip())
+            try:
+                type_of_matrix = int(lines[index].strip())
+                size_of_matrix = int(lines[index + 1].strip())
+                output_type = int(lines[index + 2].strip())
+            except ValueError:
+                print('Invalid input data format!')
+                sys.exit(1)
             matrix_data = lines[index + 3].strip()
             new_matrix = None
             if type_of_matrix == 1:
                 new_matrix = SquareMatrix(size_of_matrix, output_type)
-                new_matrix.fill_matrix(matrix_data)
+                try:
+                    new_matrix.fill_matrix(matrix_data)
+                except IndexError or ValueError:
+                    print('Invalid input data format!')
+                    sys.exit(1)
             elif type_of_matrix == 2:
                 new_matrix = SquareDiagonalMatrix(size_of_matrix, output_type)
-                new_matrix.fill_matrix(matrix_data)
+                try:
+                    new_matrix.fill_matrix(matrix_data)
+                except IndexError or ValueError:
+                    print('Invalid input data format!')
+                    sys.exit(1)
             elif type_of_matrix == 3:
                 new_matrix = LowerTriangularMatrix(size_of_matrix, output_type)
-                new_matrix.fill_matrix(matrix_data)
+                try:
+                    new_matrix.fill_matrix(matrix_data)
+                except IndexError or ValueError:
+                    print('Invalid input data format!')
+                    sys.exit(1)
             self.add(new_matrix)
 
     def write_to_file(self, out_file):
         current = self.head
-        if self.head is None:
-            out_file.write('Container is empty!\n')
-        else:
-            i = 0
-            out_file.write('Filled Container:\n')
-            if current.data.get_output_type() == 1:
-                out_file.write(f'{i}: {str(current.data.print_matrix())}')
+        try:
+            if self.head is None:
+                out_file.write('Container is empty!\n')
             else:
-                out_file.write(f'{i}: {str(current.data)}')
-            while current.next != self.head:
-                i += 1
-                current = current.next
+                i = 0
+                out_file.write('Filled Container:\n')
                 if current.data.get_output_type() == 1:
                     out_file.write(f'{i}: {str(current.data.print_matrix())}')
                 else:
                     out_file.write(f'{i}: {str(current.data)}')
-        out_file.write(f'Container contains {self.__len__()} elements.\n')
+                while current.next != self.head:
+                    i += 1
+                    current = current.next
+                    if current.data.get_output_type() == 1:
+                        out_file.write(f'{i}: {str(current.data.print_matrix())}')
+                    else:
+                        out_file.write(f'{i}: {str(current.data)}')
+            out_file.write(f'Container contains {self.__len__()} elements.\n')
+        except OSError:
+            print(f'File writing error {out_file}!')
+            sys.exit(1)
 
     def filtered_write_to_file(self, out_file):
         current = self.head
-        if self.head is None:
-            out_file.write('Container is empty!\n')
-        else:
-            i = 0
-            out_file.write('Filled Container:\n')
-            if current.data.get_type_of_matrix() == 'Square Matrix':
-                if current.data.get_output_type() == 1:
-                    out_file.write(f'{i}: {str(current.data.print_matrix())}')
-                else:
-                    out_file.write(f'{i}: {str(current.data)}')
-            while current.next != self.head:
-                i += 1
-                current = current.next
+        try:
+            if self.head is None:
+                out_file.write('Container is empty!\n')
+            else:
+                i = 0
+                out_file.write('Filled Container:\n')
                 if current.data.get_type_of_matrix() == 'Square Matrix':
                     if current.data.get_output_type() == 1:
                         out_file.write(f'{i}: {str(current.data.print_matrix())}')
                     else:
                         out_file.write(f'{i}: {str(current.data)}')
-        out_file.write(f'Container contains {self.__len__()} elements.\n')
+                while current.next != self.head:
+                    i += 1
+                    current = current.next
+                    if current.data.get_type_of_matrix() == 'Square Matrix':
+                        if current.data.get_output_type() == 1:
+                            out_file.write(f'{i}: {str(current.data.print_matrix())}')
+                        else:
+                            out_file.write(f'{i}: {str(current.data)}')
+            out_file.write(f'Container contains {self.__len__()} elements.\n')
+        except OSError:
+            print(f'File writing error {out_file}!')
+            sys.exit(1)
 
     def sort(self):
         if self.head is not None:
