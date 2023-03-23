@@ -1,4 +1,4 @@
-from matrix import SquareMatrix, SquareDiagonalMatrix, LowerTriangularMatrix
+from matrix import SquareMatrix, SquareDiagonalMatrix, LowerTriangularMatrix, check
 import sys
 
 
@@ -141,3 +141,16 @@ class CircularLinkedList:
                 node2 = self.head
                 if node1 is self.head:
                     break
+
+    def check_matrices(self):
+        node1 = self.head
+        while True:
+            node2 = self.head
+            while True:
+                check(node1.data, node2.data)
+                node2 = node2.next
+                if node2 == self.head:
+                    break
+            node1 = node1.next
+            if node1 == self.head:
+                break

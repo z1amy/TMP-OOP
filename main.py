@@ -20,6 +20,7 @@ def main():
         sys.exit(1)
 
     cl.sort()
+    cl.check_matrices()
 
     try:
         with open(output_file, 'w') as out_file:
